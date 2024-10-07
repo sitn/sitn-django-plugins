@@ -10,7 +10,6 @@ class WMTSWidget(OpenLayersWidget):
             (extent[0] + extent[2]) / 2,
             (extent[1] + extent[3]) / 2,
         ]
-    print(center_from_extent)
     widget_options = {
         "wmts_layer_name": settings.OLWIDGET["wmts"].get("layer_name"),
         "wmts_style": settings.OLWIDGET["wmts"]["style"],
