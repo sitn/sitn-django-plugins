@@ -41,11 +41,14 @@ OLWIDGET = {
         "url_template": 'https://sitn.ne.ch/mapproxy95/wmts/1.0.0/{layer}/{style}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.png',
         "request_encoding": 'REST', # optional
         "format": 'image/png' # optional
+    },
+    "search": { # optional, only if you want a search service
+        "url_template": 'https://sitn.ne.ch/search?limit=10&partitionlimit=2&interface=desktop&query={search_term}'
     }
 }
 ```
 
-3. You can now use WMTSWidget in your gis forms:
+3. You can now use `WMTSWidget` in your gis forms:
 
 ```python
 from django_extended_ol.forms.widgets import WMTSWidget
@@ -53,6 +56,8 @@ from django_extended_ol.forms.widgets import WMTSWidget
 class MyCustomGISClass:
     gis_widget = WMTSWidget
 ```
+
+If you want a search widget, you can use `WMTSWithSearchWidget`. Please check search service specification below.
 
 4. You can also use it in your admin.py:
 
@@ -64,8 +69,15 @@ class MyCustomGISClass:
     admin.site.register(YourGeomModel, WMTSGISModelAdmin)
 ```
 
+If you want the search widget please use `WMTSGISWithSearchModelAdmin`. Please check search service specification below.
+
 5. Start the development server and visit the admin.
 
+
+## Search service specification
+
+You'll need a templated URL as showcased in the `settings.py` above.
+Such service should reply GeoJSON feature collection and each feature should have a `bbox` and a property named `label`.
 
 # Build this package
 

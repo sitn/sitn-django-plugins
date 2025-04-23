@@ -21,13 +21,16 @@ class WMTSWidget(OpenLayersWidget):
         "default_map_center": settings.OLWIDGET["globals"].get("default_center", center_from_extent),
         "default_resolution": settings.OLWIDGET["globals"].get("default_resolution", 8),
         "extent": extent,
-        "resolutions" : settings.OLWIDGET["globals"]["resolutions"]
+        "resolutions": settings.OLWIDGET["globals"]["resolutions"]
     }
 
     class Media(OpenLayersWidget.Media):
         js = OpenLayersWidget.Media.js + (
             "olwidget/js/WMTSWidget.js",
         )
+        css = {
+            "all": OpenLayersWidget.Media.css["all"] + ("olwidget/css/WMTSWidget.css",)
+        }
 
     def __init__(self, attrs=None):
         super().__init__()
@@ -36,3 +39,10 @@ class WMTSWidget(OpenLayersWidget):
             self.attrs[key] = self.widget_options[key]
         if attrs:
             self.attrs.update(attrs)
+
+
+class WMTSWithSearchWidget(WMTSWidget):
+    widget_options = {
+        **WMTSWidget.widget_options, 
+        "search_url": settings.OLWIDGET["search"].get("url_template", None)
+    }
