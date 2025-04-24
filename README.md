@@ -1,81 +1,79 @@
-# django-extended-ol
+# sitn-django-plugins
 
-django-extended-ol is a Django app that extends the basic OpenLayers Widget.
+This repository has two goals:
 
-Features:
+* demo how to use a sitn django plugins within this a basic Django app
+* provide a sandbox to develop new custom plugins
 
-* Custom WMTS base_layer with fixed resolutions
-* Search on the map (third-party service needed)
+## Requirements
 
-## Quick start
+* Postgis
+* poetry (pip install poetry)
 
-```sh
-pip install django-extended-ol
+## Getting started
+
+1. Create a local postgis database 
+
+```sql
+CREATE DATABASE sitn;
+CREATE EXTENSION postgis;
+CREATE SCHEMA sitn;
 ```
 
-1. Add "django_extended_ol" to your INSTALLED_APPS setting like this:
+2. Fill your `.env` accordingly. A `.env.sample` is provided to help you.
 
-```python
-INSTALLED_APPS = [
-    ...,
-    "django_extended_ol",
-]
+3. Install you app and activate venv:
+
+```shell
+poetry install
+poetry shell
 ```
 
-2. Configure django_extended_ol in your settings.py, here's an example:
+4. Migrate and run your app
 
-```python
-OLWIDGET = {
-    "globals": {
-        "srid": 2056,
-        "default_center": [2551470, 1211190], # optional
-        "default_resolution": 18, # optional
-        "extent": [2420000, 1030000, 2900000, 1360000],
-        "resolutions": [250, 100, 50, 20, 10, 5, 2.5, 2, 1.5, 1, 0.5, 0.25, 0.125, 0.0625]
-    },
-    "wmts": {
-        "layer_name": 'plan_cadastral',
-        "style": 'default',
-        "matrix_set": 'EPSG2056',
-        "attributions": '<a target="new" href="https://sitn.ne.ch/web/conditions_utilisation/contrat_SITN_MO.htm'
-            + '">© SITN</a>', # optional
-        "url_template": 'https://sitn.ne.ch/mapproxy95/wmts/1.0.0/{layer}/{style}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.png',
-        "request_encoding": 'REST', # optional
-        "format": 'image/png' # optional
-    },
-    "search": { # optional, only if you want a search service
-        "url_template": 'https://sitn.ne.ch/search?limit=10&partitionlimit=2&interface=desktop&query={search_term}'
-    }
-}
+```shell
+python manage.py migrate
+python manage.py runserver
 ```
 
-3. You can now use `WMTSWidget` in your gis forms:
+## Start developing
 
-```python
-from django_extended_ol.forms.widgets import WMTSWidget
-...
-class MyCustomGISClass:
-    gis_widget = WMTSWidget
+The django app is now running the plugins installed from pypi.org. If you want it to run directly from the sub-directory, it is possible. This way you don't have to compile your package and install it to test your dev.
+
+Let's say you want to start developing a new feature on django-extended-ol. Run this in your poetry shell activated:
+
+```shell
+poetry remove django-extended-ol
+cd django-extended-ol
+python setup.py develop
+cd ..
+python manage.py runserver
 ```
 
-If you want a search widget, you can use `WMTSWithSearchWidget`. Please check search service specification below.
+With `python setup.py develop` we created a symlink between the venv and the module we want to work on.
 
-4. You can also use it in your admin.py:
+At the end of the development, don't forget to revert back:
 
-```python
-    from django.contrib.gis import admin
-    from .models import YourGeomModel
-    from olwidget.admin import WMTSGISModelAdmin
-
-    admin.site.register(YourGeomModel, WMTSGISModelAdmin)
+```shell
+cd django-extended-ol
+python setup.py develop --uninstall
+cd ..
+poetry add django-extended-ol
 ```
 
-If you want the search widget please use `WMTSGISWithSearchModelAdmin`. Please check search service specification below.
+# Build and publish
 
-5. Start the development server and visit the admin.
+1. Don't forget to update README.md of your package and increment the version number in the pyproject.toml.
 
+2. Build your package, for example for `django-extended-ol`:
 
-## Search service specification
+```shell
+cd django-extended-ol
+python -m build
+```
 
-You'll need a templated URL as showcased in the `settings.py` above.
-Such service should reply GeoJSON feature collection and each feature should have a `bbox` and a property named `label`.
+3. Publish it to pypi.org 
+
+```shell
+python -m twine upload dist/*
+```

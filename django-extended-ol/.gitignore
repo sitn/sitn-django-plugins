@@ -1,0 +1,12 @@
+*.pyc
+*.swp
+*.egg
+env/
+.venv/
+.eggs/
+.tox/
+.pytest_cache/
+.vscode/
+.eggs/
+dist
+django_extended_ol.egg-info
