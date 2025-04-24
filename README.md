@@ -5,6 +5,7 @@ django-extended-ol is a Django app that extends the basic OpenLayers Widget.
 Features:
 
 * Custom WMTS base_layer with fixed resolutions
+* Search on the map (third-party service needed)
 
 ## Quick start
 
@@ -78,10 +79,3 @@ If you want the search widget please use `WMTSGISWithSearchModelAdmin`. Please c
 
 You'll need a templated URL as showcased in the `settings.py` above.
 Such service should reply GeoJSON feature collection and each feature should have a `bbox` and a property named `label`.
-
-# Build this package
-
-```sh
-py -m build
-py -m twine upload dist/*
-```
