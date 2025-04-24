@@ -12,6 +12,8 @@ python = "^3.10"
 django = "^5.2"
 psycopg2 = "^2.9.10"
 django-extended-ol = "^1.1.1"
+twine = "^6.1.0"
+build = "^1.2.2.post1"
 
 
 [build-system]
