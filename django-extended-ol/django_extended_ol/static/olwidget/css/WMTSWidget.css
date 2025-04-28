@@ -8,7 +8,7 @@
     border: 1px solid var(--border-color);
     max-height: 200px;
     overflow-y: auto;
-    background-color: red;
+    background-color: var(--darkened-bg);
     color: var(--body-fg);
     width: 20em;
     position: absolute;
