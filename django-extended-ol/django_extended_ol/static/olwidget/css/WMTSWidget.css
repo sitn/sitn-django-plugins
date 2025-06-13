@@ -5,10 +5,10 @@
 }
 
 .ext-ol-autocomplete-results {
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-color, #CCC);
     max-height: 200px;
     overflow-y: auto;
-    background-color: var(--darkened-bg);
+    background-color: var(--darkened-bg, #FFF);
     color: var(--body-fg);
     width: 20em;
     position: absolute;
@@ -22,7 +22,7 @@
 }
 
 .ext-ol-autocomplete-results div:hover {
-    background-color: var(--darkened-bg);
+    background-color: var(--darkened-bg, #FFF);
 }
 
 .ext-ol-hidden {

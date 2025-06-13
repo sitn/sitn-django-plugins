@@ -6,12 +6,6 @@
 
 <div id="{{ id }}_div_map" class="dj_map_wrapper">
     <div id="{{ id }}_map" class="dj_map"></div>
-    {% if search_url %}
-    <div id="{{ id }}_input_search" class="ext-ol-search-widget">
-      <input type="text" class="vTextField ext-ol-search" name="search">
-      <div class="ext-ol-autocomplete-results ext-ol-hidden"></div>
-    </div>
-    {% endif %}
     {% if not disabled %}<span class="clear_features"><a href="">{% translate "Delete all Features" %}</a></span>{% endif %}
     {% if display_raw %}<p>{% translate "Debugging window (serialized value)" %}</p>{% endif %}
     <textarea id="{{ id }}" class="vSerializedField required" cols="150" rows="10" name="{{ name }}"
@@ -64,4 +58,10 @@ options.search_url = '{{ search_url|safe }}';
 
 var {{ module }} = new WMTSWidget(options);
 </script>
+{% if search_url %}
+<div class="ext-ol-search-widget">
+  <input type="text" class="vTextField ext-ol-search" name="search">
+  <div class="ext-ol-autocomplete-results ext-ol-hidden"></div>
+</div>
+{% endif %}
 </div>

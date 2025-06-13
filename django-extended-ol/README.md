@@ -58,9 +58,17 @@ class MyCustomGISClass:
     gis_widget = WMTSWidget
 ```
 
+Note that CSS is not provided by default, you have to give your map a height like:
+
+```css
+    .dj_map {
+        height: 400px;
+    }
+```
+
 If you want a search widget, you can use `WMTSWithSearchWidget`. Please check search service specification below.
 
-4. You can also use it in your admin.py:
+1. You can also use it in your admin.py:
 
 ```python
 from django.contrib.gis import admin
