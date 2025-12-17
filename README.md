@@ -47,18 +47,18 @@ Let's say you want to start developing a new feature on django-extended-ol. Run 
 ```shell
 poetry remove django-extended-ol
 cd django-extended-ol
-python setup.py develop
+python -m pip install --editable .
 cd ..
 python manage.py runserver
 ```
 
-With `python setup.py develop` we created a symlink between the venv and the module we want to work on.
+With `python -m pip install --editable .` we install a live-reloaded version of the plugin that we will need to uninstall later.
 
 At the end of the development, don't forget to revert back:
 
 ```shell
 cd django-extended-ol
-python setup.py develop --uninstall
+python -m pip uninstall django-extended-ol
 cd ..
 poetry add django-extended-ol
 ```
@@ -73,6 +73,8 @@ poetry add django-extended-ol
 cd django-extended-ol
 python -m build
 ```
+
+If necessary, delete old built versions in `dist` folder.
 
 3. Publish it to pypi.org 
 
