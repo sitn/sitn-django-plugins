@@ -9,6 +9,8 @@ This repository has two goals:
 
 * Postgis
 * poetry (pip install poetry)
+* poetry Shell plugin (poetry self add poetry-plugin-shell)
+* Poetry Dotenv Plugin (poetry self add poetry-dotenv-plugin)
 
 ## Getting started
 
@@ -24,7 +26,7 @@ CREATE SCHEMA sitn;
 
 3. Install you app and activate venv:
 
-```shell
+```powershell
 poetry install
 poetry shell
 ```
