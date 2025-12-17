@@ -85,6 +85,7 @@ class WMTSWidget extends MapWidget {
                 this.inputSearchElement.addEventListener("input", () => this.search(this.inputSearchElement.value));
             });
         });
+        this.featureOverlay.setStyle(vectorLayerStyle);
     }
 }
 

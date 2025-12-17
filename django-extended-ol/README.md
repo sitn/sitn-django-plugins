@@ -43,6 +43,13 @@ OLWIDGET = {
         "request_encoding": 'REST', # optional
         "format": 'image/png' # optional
     },
+    "vector": { # optional, only if you want to override the default style
+        "fill_color": "rgba(255, 255, 255, 0.2)",
+        "stroke_color": "yellow",
+        "stroke_width": 2,
+        "circle_radius": 7,
+        "circle_fill_color": "yellow"
+    },
     "search": { # optional, only if you want a search service
         "url_template": 'https://sitn.ne.ch/search?limit=10&partitionlimit=2&interface=desktop&query={search_term}'
     }

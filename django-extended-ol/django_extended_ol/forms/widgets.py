@@ -20,6 +20,11 @@ class WMTSWidget(OpenLayersWidget):
         "wmts_format": settings.OLWIDGET["wmts"].get("format", None),
         "default_map_center": settings.OLWIDGET["globals"].get("default_center", center_from_extent),
         "default_resolution": settings.OLWIDGET["globals"].get("default_resolution", 8),
+        "fill_color": settings.OLWIDGET.get("vector", {}).get("fill_color", "rgba(255, 255, 255, 0.2)"),
+        "stroke_color": settings.OLWIDGET.get("vector", {}).get("stroke_color", "red"),
+        "stroke_width": settings.OLWIDGET.get("vector", {}).get("stroke_width", 2),
+        "circle_radius": settings.OLWIDGET.get("vector", {}).get("circle_radius", 7),
+        "circle_fill_color": settings.OLWIDGET.get("vector", {}).get("circle_fill_color", "red"),
         "extent": extent,
         "resolutions": settings.OLWIDGET["globals"]["resolutions"]
     }
