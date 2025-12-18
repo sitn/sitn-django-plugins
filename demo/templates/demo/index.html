@@ -52,14 +52,17 @@
       </div>
       <div class="col">
         <div class="card">
-          <h2>DotnetId authentication</h2>
+          <h2>Authentification DotnetId</h2>
           {% if user.is_authenticated %}
           <p>Vous êtes connecté en tant que {{ user.username }}</p>
           <a href="{% url 'account_logout' %}" class="btn btn-danger">Se déconnecter</a>
           {% else %}
-          <a href="{% url 'dotnetidprovider_login' 'dotnetid' %}" class="btn btn-primary">
-            Se connecter avec DotnetId
-          </a>
+          <form method="post" action="{% url 'dotnetidprovider_login' 'dotnetid' %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary">
+                  Se connecter avec DotnetId
+              </button>
+          </form>
           {% endif %}
         </div>
       </div>
