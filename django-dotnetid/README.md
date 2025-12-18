@@ -1,6 +1,4 @@
-============
-django-dotnetid
-============
+# django-dotnetid
 
 django-dotnetid is a Django app extending django-allauth.
 It implements an OpenID connect provider able to map extra_info from the id_token
@@ -10,16 +8,17 @@ You need to install django-allauth to be able to use this extension.
 
 A full working example can be found here: https://github.com/sitn/django-dotnetid-example
 
-Quick start
------------
+## Quick start
 
-1. Install this package along with django-allauth in your project::
+1. Install requiremed packages in your project:
 
-    python -m pip install django-allauth
-    python -m pip install git+https://github.com/sitn/django-dotnetid.git
+```sh
+python -m pip install django-allauth pyjwt cryptography django-dotnetid
+```
 
-2. Add "django_dotnetid" to your INSTALLED_APPS setting like this::
+2. Add `django_dotnetid` to your INSTALLED_APPS setting like this:
 
+```python
     INSTALLED_APPS = [
         ...,
         "django_dotnetid",
@@ -28,15 +27,21 @@ Quick start
         "allauth.socialaccount",
         "allauth.socialaccount.providers.openid_connect",
     ]
+```
 
-3. Include the dotnetidprovider URLconf in your project urls.py like this::
+3. Include the dotnetidprovider URL conf in your project urls.py like this:
 
+```python
+from django.urls import include, path
+...
     path('accounts/', include('allauth.urls')),
+```
 
-4. Run ``python manage.py migrate`` to create the models.
+4. Run `python manage.py migrate` to create the models.
 
-5. In your settings.py, you can add the provider like that::
+5. In your settings.py, you can add the provider like that:
 
+```python
     AUTHENTICATION_BACKENDS = [
         "django.contrib.auth.backends.ModelBackend",
         "allauth.account.auth_backends.AuthenticationBackend",
@@ -72,14 +77,19 @@ Quick start
     LOGIN_REDIRECT_URL = 'index'
     ACCOUNT_LOGOUT_REDIRECT = 'index'
     SITE_ID = 1
+```
 
+6.
 
-6. Start the development server.
+Add `allauth.account.middleware.AccountMiddleware` at the end of your middlewares:
 
-7. Visit the ``/``.
+```python
+MIDDLEWARE = [
+...
+    "allauth.account.middleware.AccountMiddleware",
+]
+```
 
-Build
------------
+7. Start the development server.
 
-    python setup.py sdist
-
+8. Visit the ``/``.

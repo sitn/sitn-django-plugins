@@ -15,6 +15,9 @@ twine = "^6.1.0"
 build = "^1.2.2.post1"
 setuptools = "^80.9.0"
 django-extended-ol = "^1.2.1"
+django-allauth = "^65.13.1"
+pyjwt = "^2.10.1"
+cryptography = "^46.0.3"
 
 
 [build-system]
