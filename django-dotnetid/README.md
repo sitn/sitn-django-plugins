@@ -51,41 +51,41 @@ from django.urls import include, path
 5. In your settings.py, you can add the provider like that:
 
 ```python
-    AUTHENTICATION_BACKENDS = [
-        "django.contrib.auth.backends.ModelBackend",
-        "allauth.account.auth_backends.AuthenticationBackend",
-    ]
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
 
-    SOCIALACCOUNT_PROVIDERS = {
-        "dotnetidprovider": {
-            "APP": {
-                "provider_id": "dotnetid",
-                "name": "Etat de Neuchâtel",
-                "client_id": os.environ['DOTNETID_CLIENT_ID'],
-                "secret": os.environ['DOTNETID_CLIENT_SECRET'],
-                "settings": {
-                    "server_url": os.environ['DOTNETID_SERVER_URL'],
-                },
+SOCIALACCOUNT_PROVIDERS = {
+    "dotnetidprovider": {
+        "APP": {
+            "provider_id": "dotnetid",
+            "name": "Etat de Neuchâtel",
+            "client_id": os.environ['DOTNETID_CLIENT_ID'],
+            "secret": os.environ['DOTNETID_CLIENT_SECRET'],
+            "settings": {
+                "server_url": os.environ['DOTNETID_SERVER_URL'],
             },
-            "SCOPE": [
-                "profile",
-                "openid",
-                "glados",
-            ],
-            "EXTRA_ATTRIBUTES_PREFIX": "djangoopenid",
-            "EXTRA_ATTRIBUTES_NAMES": [
-                "groups",
-                "admin",
-            ],
-            "OAUTH_PKCE_ENABLED": True,
-            "ID_TOKEN_ISSUER": os.environ['DOTNETID_SERVER_URL'],
-        }
+        },
+        "SCOPE": [
+            "profile",
+            "openid",
+            "glados",
+        ],
+        "EXTRA_ATTRIBUTES_PREFIX": "djangoopenid",
+        "EXTRA_ATTRIBUTES_NAMES": [
+            "groups",
+            "admin",
+        ],
+        "OAUTH_PKCE_ENABLED": True,
+        "ID_TOKEN_ISSUER": os.environ['DOTNETID_SERVER_URL'],
     }
-    SOCIALACCOUNT_EMAIL_VERIFICATION = None
-    SOCIALACCOUNT_ADAPTER  = 'django_dotnetid.adapter.DotnetIdAccountAdapter'
-    LOGIN_REDIRECT_URL = 'index'
-    ACCOUNT_LOGOUT_REDIRECT = 'index'
-    SITE_ID = 1
+}
+SOCIALACCOUNT_EMAIL_VERIFICATION = None
+SOCIALACCOUNT_ADAPTER  = 'django_dotnetid.adapter.DotnetIdAccountAdapter'
+LOGIN_REDIRECT_URL = 'index'
+ACCOUNT_LOGOUT_REDIRECT = 'index'
+SITE_ID = 1
 ```
 
 7. Start the development server.
