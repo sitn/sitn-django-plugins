@@ -29,7 +29,16 @@ python -m pip install django-allauth pyjwt cryptography django-dotnetid
     ]
 ```
 
-3. Include the dotnetidprovider URL conf in your project urls.py like this:
+3. Add `allauth.account.middleware.AccountMiddleware` at the end of your middlewares:
+
+```python
+MIDDLEWARE = [
+...
+    "allauth.account.middleware.AccountMiddleware",
+]
+```
+
+4. Include the dotnetidprovider URL conf in your project urls.py like this:
 
 ```python
 from django.urls import include, path
@@ -77,17 +86,6 @@ from django.urls import include, path
     LOGIN_REDIRECT_URL = 'index'
     ACCOUNT_LOGOUT_REDIRECT = 'index'
     SITE_ID = 1
-```
-
-6.
-
-Add `allauth.account.middleware.AccountMiddleware` at the end of your middlewares:
-
-```python
-MIDDLEWARE = [
-...
-    "allauth.account.middleware.AccountMiddleware",
-]
 ```
 
 7. Start the development server.
