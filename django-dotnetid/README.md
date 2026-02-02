@@ -10,7 +10,7 @@ A full working example can be found here: https://github.com/sitn/django-dotneti
 
 ## Quick start
 
-1. Install requiremed packages in your project:
+1. Install required packages in your project:
 
 ```sh
 python -m pip install django-allauth pyjwt cryptography django-dotnetid
