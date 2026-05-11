@@ -65,16 +65,18 @@ poetry add django-extended-ol
 
 # Build and publish
 
+⚠️ You need a pypi.org account and a personal access token in order to publish.
+
 1. Don't forget to update README.md of your package and increment the version number in the pyproject.toml.
 
 2. Build your package, for example for `django-extended-ol`:
+
+If necessary, delete old built versions in `dist` folder.
 
 ```shell
 cd django-extended-ol
 python -m build
 ```
-
-If necessary, delete old built versions in `dist` folder.
 
 3. Publish it to pypi.org 
 
