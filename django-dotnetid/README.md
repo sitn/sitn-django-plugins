@@ -13,7 +13,7 @@ A full working example can be found here: https://github.com/sitn/django-dotneti
 1. Install requiremed packages in your project:
 
 ```sh
-python -m pip install django-allauth pyjwt cryptography django-dotnetid
+python -m pip install django-dotnetid
 ```
 
 2. Add `django_dotnetid` to your INSTALLED_APPS setting like this:

@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = "django-dotnetid"
-version = "1.0.0"
+version = "1.0.1"
 authors = [
   { name="SITN", email="sitn@ne.ch" },
   { name="maltaesousa", email="stephane.maltaesousa@ne.ch" },
@@ -13,7 +13,10 @@ description = "A django-allauth dotnetid provider"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "Django >= 5.0"
+    "Django >= 5.0",
+    "pyjwt",
+    "cryptography",
+    "django-allauth",
 ]
 classifiers = [
     "Environment :: Web Environment",
