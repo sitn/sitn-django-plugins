@@ -24,7 +24,8 @@ class DotnetIdAccountAdapter(DefaultSocialAccountAdapter):
                 u.is_staff = True
                 u.is_superuser = True
 
-            for group_name in social_account.extra_data[groups_attr]:
+            for group_name in social_account.extra_data[groups_attr].split(','):
+                group_name = group_name.strip()
                 if group_name.lower() == 'admin':
                     continue
                 group_instance = Group.objects.filter(name=group_name).first()

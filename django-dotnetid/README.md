@@ -73,10 +73,6 @@ SOCIALACCOUNT_PROVIDERS = {
             "glados",
         ],
         "EXTRA_ATTRIBUTES_PREFIX": "djangoopenid",
-        "EXTRA_ATTRIBUTES_NAMES": [
-            "groups",
-            "admin",
-        ],
         "OAUTH_PKCE_ENABLED": True,
         "ID_TOKEN_ISSUER": os.environ['DOTNETID_SERVER_URL'],
     }

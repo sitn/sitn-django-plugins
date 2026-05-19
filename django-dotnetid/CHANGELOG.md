@@ -1,5 +1,9 @@
-## 1.0.1
+## 1.1.0
 
-### Added
+- Simplify extra_attributes handler
+- Set a preferred_username for agov
+- Fix groups parsing
+
+## 1.0.1
 
 - Depedencies are now listed in the pyproject.toml file

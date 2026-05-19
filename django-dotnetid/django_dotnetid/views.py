@@ -21,18 +21,6 @@ ID_TOKEN_ISSUER = (
         .get("ID_TOKEN_ISSUER")
 )
 
-EXTRA_ATTRIBUTES_PREFIX = (
-    getattr(settings, "SOCIALACCOUNT_PROVIDERS", {})
-        .get("dotnetidprovider", {})
-        .get("EXTRA_ATTRIBUTES_PREFIX", "")
-)
-
-EXTRA_ATTRIBUTES_NAMES = (
-    getattr(settings, "SOCIALACCOUNT_PROVIDERS", {})
-        .get("dotnetidprovider", {})
-        .get("EXTRA_ATTRIBUTES_NAMES", [])
-)
-
 class DotnetIdAdapter(OpenIDConnectOAuth2Adapter):
     provider_id = DotnetIdProvider.id
 
@@ -59,33 +47,10 @@ class DotnetIdAdapter(OpenIDConnectOAuth2Adapter):
             LOGGER.error(f"Invalid id_token: {e}")
             raise OAuth2Error("Invalid id_token") from e
 
-        identity_provider = identity_data['idp']
-        extra_data = {
-            "first_name": identity_data['given_name'],
-            "last_name": identity_data['family_name'],
-            "sub": identity_data['sub'],
-            "idp": identity_provider,
-        }
+        if identity_data.get("preferred_username") is None and identity_data.get("email"):
+            identity_data["preferred_username"] = identity_data["email"]
         
-        match identity_provider:
-            case "nech":
-                extra_data['email'] = identity_data['upn']
-                extra_data['username'] = identity_data['name'].replace("ACN\\", "")
-                for attr in EXTRA_ATTRIBUTES_NAMES:
-                    extra_attr = f"{EXTRA_ATTRIBUTES_PREFIX}.{attr}"
-                    try:
-                        extra_data[extra_attr] = identity_data[extra_attr]
-                        
-                    except KeyError as e:
-                        LOGGER.error(f"{extra_attr} is defined in settings but not present in id_token.")
-                        raise OAuth2Error(f"{extra_attr} is defined in settings but not present in id_token.")
-            case "agov":
-                extra_data['email'] = identity_data['email']
-                extra_data['username'] = identity_data['email']
-            case _:
-                LOGGER.error(f"Unknown identity provider: {identity_provider}")
-
-        login = self.get_provider().sociallogin_from_response(request, extra_data)
+        login = self.get_provider().sociallogin_from_response(request, identity_data)
         return login
 
 def login(request, provider_id):
