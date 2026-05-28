@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Changed minimum python version
+
 ## 1.1.0
 
 - Simplify extra_attributes handler
